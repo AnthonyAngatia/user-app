@@ -11,6 +11,10 @@
         <label for="name" class="form-label">Name</label>
         <input type="text" class="form-control" formControlName="name" id="name" placeholder="Enter name">
       </div>
+      <div class="text-danger small ml-2"
+           *ngIf="">
+        Name is required
+      </div>
       <div class="mb-3">
         <label for="username" class="form-label">Username</label>
         <input type="text" class="form-control" formControlName="username" id="username" placeholder="Enter username">

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { catchError, EMPTY, map, Observable, throwError } from "rxjs";
+import { catchError, map, Observable, throwError } from "rxjs";
 import { IUser } from "../interfaces";
 
 @Injectable({
@@ -10,6 +10,29 @@ export class UserService {
   private baseUrl = 'https://jsonplaceholder.typicode.com/';
 
   constructor(private httpClient: HttpClient) {
+  }
+
+  createUser(user: IUser) {
+    this.httpClient.post<IUser>(`${this.baseUrl}/users`, user).pipe(
+      map(response => {
+        if (response.id) {
+          return response;
+        } else if (!response) {
+          throw new HttpErrorResponse({
+            status: 500,
+            statusText: "An error occurred",
+            url: `${this.baseUrl}/uses`
+          });
+        }
+        throw new HttpErrorResponse({
+          status: 500,
+          statusText: "An error occured",
+          url: `${this.baseUrl}/uses`
+        });
+      }),
+      catchError(this.handleError)
+    )
+
   }
 
   fetchUsers(): Observable<IUser[]> {
