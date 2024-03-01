@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from "./user.service";
+import { catchError, EMPTY } from "rxjs";
 
 @Component({
   selector: 'app-user',
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  users$ = this.userService.fetchUsers().pipe(
+    catchError(err=>{
+      console.error(err)
+      return EMPTY;
+    })
+  )
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
   }
