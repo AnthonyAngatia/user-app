@@ -1,0 +1,54 @@
+<div class="px-2">
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Add User</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="userForm">
+      <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input type="text" class="form-control" formControlName="name" id="name" placeholder="Enter name">
+      </div>
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" class="form-control" formControlName="username" id="username" placeholder="Enter username">
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="text" class="form-control" formControlName="email" id="email" placeholder="Enter email">
+      </div>
+      <div class="mb-3">
+        <label for="phone" class="form-label">Phone</label>
+        <input type="text" class="form-control" formControlName="phone" id="phone" placeholder="Enter phone">
+      </div>
+      <div class="mb-3">
+        <label for="website" class="form-label">Website</label>
+        <input type="text" class="form-control" formControlName="website" id="website" placeholder="Enter website">
+      </div>
+      <h5>Address</h5>
+      <div formGroupName="address" class="px-2">
+        <div class="mb-3">
+          <label for="street" class="form-label">Street</label>
+          <input type="text" class="form-control" formControlName="street" id="street" placeholder="Enter street">
+        </div>
+        <div class="mb-3">
+          <label for="suite" class="form-label">Suite</label>
+          <input type="text" class="form-control" formControlName="suite" id="suite" placeholder="Enter suite">
+        </div>
+        <div class="mb-3">
+          <label for="city" class="form-label">City</label>
+          <input type="text" class="form-control" formControlName="city" id="city" placeholder="Enter city">
+        </div>
+      </div>
+
+      <br>Valid: {{userForm.valid}}
+      <br>Value: {{userForm.value | json}}
+      <div class="d-flex justify-content-between">
+        <button class="primary-lg-btn px-4" aria-label="Close" (click)="closeModal()">Cancel</button>
+        <button class="px-4" [ngClass]="(userForm.valid) ? 'default-lg-btn' : 'disabled-lg-btn'" (click)="submitForm()">Add</button>
+      </div>
+    </form>
+  </div>
+</div>

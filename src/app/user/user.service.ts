@@ -9,13 +9,18 @@ import { IUser } from "../interfaces";
 export class UserService {
   private baseUrl = 'https://jsonplaceholder.typicode.com/';
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
-  fetchUsers(): Observable<IUser[]>{
+  fetchUsers(): Observable<IUser[]> {
     return this.httpClient.get<IUser[]>(`${this.baseUrl}/users`).pipe(
-      map(response =>{
-        if(response === null){
-          throw new HttpErrorResponse({status: 500, statusText: "No response was returned", url: `${this.baseUrl}/uses`});
+      map(response => {
+        if (response === null) {
+          throw new HttpErrorResponse({
+            status: 500,
+            statusText: "No response was returned",
+            url: `${this.baseUrl}/uses`
+          });
         }
         return response;
       }),
@@ -27,6 +32,10 @@ export class UserService {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
       return throwError(() => new Error('Network Error. Could not connect to the Server'));
+    } else if (error.status === 404) {
+      return throwError(() => new Error('Resource not Found'));
+    } else if (error.status === 500) {
+      return throwError(() => new Error('Server Error'));
     }
     return throwError(() => new Error('An error occured. Try again later'));
   }
