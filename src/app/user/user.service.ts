@@ -7,7 +7,7 @@ import { IUser } from "../interfaces";
   providedIn: 'root'
 })
 export class UserService {
-  private baseUrl = 'https://jsonplaceholder.typicode.com/';
+  private baseUrl = 'https://jsonplaceholder.typicode.com';
 
   constructor(private httpClient: HttpClient) {
   }

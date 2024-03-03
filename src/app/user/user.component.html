@@ -62,16 +62,16 @@
 
         <tr
           *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: 1, totalItems: 10, id :'users-table' }"
-          [ngClass]="{'missing-company': user.company.name}">
-          <td [ngClass]="{'missing-company': !user.company.name}">
+          [ngClass]="{'missing-company': user.company?.name}">
+          <td [ngClass]="{'missing-company': !user.company?.name}">
             <img *ngIf="pattern.test(user.name)" class="svg-size" [src]="'../../assets/svg/man.svg'" alt="man-svg">
             <img *ngIf="!pattern.test(user.name)" class="svg-size" [src]="'../../assets/svg/woman.svg'" alt="woman-svg">
           </td>
-          <td [ngClass]="{'missing-company': !user.company.name}">{{ user.name }}</td>
-          <td [ngClass]="{'missing-company': !user.company.name}">{{ user.email }}</td>
-          <td [ngClass]="{'missing-company': !user.company.name}">{{ user.company.name }}</td>
-          <td [ngClass]="{'missing-company': !user.company.name}">{{ user.phone }}</td>
-          <td [ngClass]="{'missing-company': !user.company.name}" class="text-secondary text-left">
+          <td [ngClass]="{'missing-company': !user.company?.name}">{{ user.name }}</td>
+          <td [ngClass]="{'missing-company': !user.company?.name}">{{ user.email }}</td>
+          <td [ngClass]="{'missing-company': !user.company?.name}">{{ user.company?.name }}</td>
+          <td [ngClass]="{'missing-company': !user.company?.name}">{{ user.phone }}</td>
+          <td [ngClass]="{'missing-company': !user.company?.name}" class="text-secondary text-left">
             <div class="btn-group" dropdown>
               <i id="button-animated" dropdownToggle class="fa-solid fa-ellipsis"
                  aria-controls="dropdown-animated">

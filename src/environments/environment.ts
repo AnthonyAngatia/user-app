@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  baseUrl: 'https://jsonplaceholder.typicode.com'
+
 };
 export const TABLE_PAGINATION_CONFIGS = {
   total: 10,
@@ -14,6 +16,7 @@ export const TABLE_PAGINATION_CONFIGS = {
   pageSizes: [5, 10, 25, 50],
   maxSize: 4,
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file
