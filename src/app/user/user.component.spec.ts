@@ -34,7 +34,7 @@ describe('UserComponent', () => {
   beforeEach(async () => {
     userServiceSpy = jasmine.createSpyObj<UserService>('UserService', {
       fetchUsers: of(mockUsers)
-    });
+    }, {users: mockUsers, listener$: of(true)});
     notifierServiceSpy = jasmine.createSpyObj<NotifierService>('NotifierService', {
       notify: undefined
     })
