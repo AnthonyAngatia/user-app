@@ -51,6 +51,22 @@ export class UserService {
     )
   }
 
+  fetchSingleUser(id: number): Observable<IUser> {
+    return this.httpClient.get<IUser>(`${this.baseUrl}/users/${id}`).pipe(
+      map(response => {
+        if (response === null) {
+          throw new HttpErrorResponse({
+            status: 500,
+            statusText: "No response was returned",
+            url: `${this.baseUrl}/uses`
+          });
+        }
+        return response;
+      }),
+      catchError(this.handleError)
+    )
+  }
+
   private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.

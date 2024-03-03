@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from "ngx-bootstrap/modal";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { UserService } from "../user.service";
-import { IUser } from 'src/app/interfaces';
+import { NotifierService } from "angular-notifier";
 
 @Component({
   selector: 'app-user-form',
@@ -12,7 +12,8 @@ import { IUser } from 'src/app/interfaces';
 export class UserFormComponent implements OnInit {
   userForm!: FormGroup;
 
-  constructor(public bsModalRef: BsModalRef, private formBuilder: FormBuilder, private userService: UserService) {
+  constructor(public bsModalRef: BsModalRef, private formBuilder: FormBuilder, private userService: UserService,
+              private notifierService: NotifierService) {
 
 
   }
@@ -50,6 +51,7 @@ export class UserFormComponent implements OnInit {
     this.userService.createUser(formValue).subscribe((value) => {
         console.log('User added successfully');
         console.log(value);
+        this.notifierService.notify('success', 'User added successfully', 'add-user');
       },
       error => {
         console.log('An error occurred');

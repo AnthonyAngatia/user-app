@@ -5,6 +5,15 @@
 export const environment = {
   production: false
 };
+export const TABLE_PAGINATION_CONFIGS = {
+  total: null,
+  firstRecord: 1,
+  lastRecord: 10,
+  perPage: 10,
+  page: 1,
+  pageSizes: [5, 10, 25, 50, 100, 250, 500],
+  maxSize: 4,
+};
 
 /*
  * For easier debugging in development mode, you can import the following file

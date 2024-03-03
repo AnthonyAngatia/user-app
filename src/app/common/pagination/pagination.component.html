@@ -1,0 +1,50 @@
+<!--<div class="row mt-2 ml-1">-->
+<!--  <div class="col-12 d-flex flex-column flex-md-row text-footer">-->
+<!--    <div class="d-flex align-items-center mb-2 mb-sm-0">-->
+<!--      <label>Showing&nbsp;</label>-->
+<!--      <strong>&nbsp;{{config.lastRecord}} &nbsp;</strong>-->
+<!--      <span> of </span>-->
+<!--      <strong>&nbsp;{{config.total}}&nbsp;</strong>-->
+<!--      <label>&nbsp;Results &nbsp; </label>-->
+<!--    </div>-->
+
+<!--    <div class="ml-auto d-flex flex-column flex-md-row mt-0 mt-sm-n4 mt-md-0">-->
+<!--      <div class="text-footer mx-3 mb-2 mb-md-0">-->
+<!--        <select id="perPage" type="text" class="ml-2 form-control form-control-sm" style="margin-top: 4px;"-->
+<!--                (change)="config.perPage=+$any($event.target).value; config.page=1; onPageChange()"-->
+<!--                [value]='10'>-->
+<!--          <option *ngFor="let pageSize of config.pageSizes" [value]="pageSize"-->
+<!--                  [selected]="pageSize===config.perPage">-->
+<!--            {{pageSize}} / Per Page-->
+<!--          </option>-->
+<!--        </select>-->
+<!--      </div>-->
+
+<!--      <pagination-template class="short-pagination" #p="paginationApi" id="{{paginationId}}"-->
+<!--                           maxSize="6"-->
+<!--                           (pageChange)="config.page = $event; onPageChange()">-->
+<!--        <div class="custom-pagination d-flex justify-content-center mt-2" [ngClass]="paginationClass">-->
+<!--          <div class="pagination-previous" [class.disabled]="p.isFirstPage()">-->
+<!--            <a *ngIf="!p.isFirstPage()" (click)="p.previous()">-->
+<!--              <i class="fas fa-chevron-left fa-sm" aria-hidden="true"></i>-->
+<!--            </a>-->
+<!--          </div>-->
+<!--          <div *ngFor="let page of p.pages" class="pagination-link" [class.current]="p.getCurrent() === page.value">-->
+<!--            <a (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">-->
+<!--              <span>{{ page.label }}</span>-->
+<!--            </a>-->
+<!--            <div *ngIf="p.getCurrent() === page.value">-->
+<!--              <span>{{ page.label }}</span>-->
+<!--            </div>-->
+<!--          </div>-->
+
+<!--          <div class="pagination-next" [class.disabled]="p.isLastPage()">-->
+<!--            <a *ngIf="!p.isLastPage()" (click)="p.next()">-->
+<!--              <i class="fas fa-chevron-right fa-sm" aria-hidden="true"></i>-->
+<!--            </a>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </pagination-template>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->

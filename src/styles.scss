@@ -6,10 +6,20 @@
 /* Importing Datepicker SCSS file. */
 @import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
 
+@import "node_modules/angular-notifier/styles";
+
+
 .color-red{
   color: red;
 }
 .btn-pd-x{
   padding-right: 62px;
   padding-left: 62px;
+}
+.svg-size{
+  height: 40px;
+  width: 40px
+}
+.cursor-pointer{
+  cursor: pointer;
 }

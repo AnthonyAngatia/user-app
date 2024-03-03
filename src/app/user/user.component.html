@@ -1,15 +1,92 @@
-<p>user works!</p>
-<button (click)="addUser()">Add User</button>
-<p>{{(users$ | async) | json}}</p>
+<section class="m-4">
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-primary" (click)="addUser()">Add User</button>
+  </div>
+  <div class="card card bg-white shadow-sm p-4">
+    <div class="d-flex justify-content-between">
+      <h4>Users</h4>
+      <button class="btn btn-outline-primary btn-sm mr-2 px-5"
+              (click)="showFilter = !showFilter ">{{ showFilter ? 'Close' : 'Filter' }}
+      </button>
+    </div>
+    <div class="my-3 p-4 card" *ngIf="showFilter" @fadeSlideInOut>
+      <form [formGroup]="filterForm">
+        <div class="d-flex">
+          <div class="col-md-4 col-sm-12 me-5">
+            <label for="name" class="form-label">Name</label>
+            <span class="color-red">*</span>
+            <input type="text" class="form-control" formControlName="name" id="name" placeholder="Enter name">
+          </div>
+          <div class="mb-3 col-md-4 col-sm-12">
+            <label for="name" class="form-label">Email</label>
+            <span class="color-red">*</span>
+            <input type="text" class="form-control" formControlName="email" id="email" placeholder="Enter email">
+          </div>
+        </div>
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-outline-secondary btn-sm mr-2 px-5 me-3" (click)="clearFilter()">Cancel</button>
+          <button class="btn btn-outline-primary btn-sm mr-2 px-5" (click)="submitForm()">Apply</button>
+        </div>
+      </form>
+    </div>
+    <div class="table-responsive">
+      <table class="table small" id="" aria-describedby="Users table">
+        <thead class="gray-thead">
+        <tr>
+          <th>Avatar</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Company Name</th>
+          <th>Phone</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="isLoading">
+        <tr>
+          <td colspan="5">
+            <div class="text-center">
+              loading
+              <!--            <app-loading-spinner></app-loading-spinner>-->
+            </div>
+          </td>
+        </tr>
+        </tbody>
+        <tbody *ngIf="!isLoading">
+        <tr *ngIf="tableError">
+          <td colspan="5">
+            <div class="mx-auto justify-content-center flex-wrap text-center">
+              Error occurred when retrieving records
+            </div>
+          </td>
+        </tr>
 
-<ng-template #template>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Modal</h4>
-    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="openModalRef?.hide()">
-      <span aria-hidden="true" class="visually-hidden">&times;</span>
-    </button>
+        <tr
+          *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: 1, totalItems: 10, id :'users' }">
+          <td>
+            <img *ngIf="pattern.test(user.name)" class="svg-size" [src]="'../../assets/svg/man.svg'" alt="man-svg">
+            <img *ngIf="!pattern.test(user.name)" class="svg-size" [src]="'../../assets/svg/woman.svg'" alt="woman-svg">
+          </td>
+          <td>{{ user.name }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.company.name }}</td>
+          <td>{{ user.phone }}</td>
+          <td class="text-secondary text-left">
+            <div class="btn-group" dropdown>
+              <i id="button-animated" dropdownToggle class="fa-solid fa-ellipsis"
+                 aria-controls="dropdown-animated">
+                <i class="fa-solid fa-ellipsis cursor-pointer">...</i>
+              </i>
+              <ul id="dropdown-animated" *dropdownMenu class="dropdown-menu"
+                  role="menu" aria-labelledby="button-animated">
+                <li role="menuitem"><a class="dropdown-item"
+                                       [routerLink]="['/users', user.id]">View</a>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-  <div class="modal-body">
-    This is a modal
-  </div>
-</ng-template>
+</section>

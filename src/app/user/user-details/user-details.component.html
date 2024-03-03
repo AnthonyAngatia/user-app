@@ -1,0 +1,38 @@
+<div class="d-flex">
+  <div class="card my-4 mx-5" style="width: 300px;">
+    <div class="card-body d-flex justify-content-center align-items-center">
+      <img *ngIf="pattern.test(user?.name ?? '')" class="avatar-size" [src]="'../../assets/svg/man.svg'" alt="man-svg">
+      <img *ngIf="!pattern.test(user?.name ?? '')" class="avatar-size" [src]="'../../assets/svg/woman.svg'"
+           alt="woman-svg">
+    </div>
+  </div>
+  <div class="card my-4 me-5" style="flex-grow: 4">
+    <div class="card-body">
+      <p>
+        <span>Name:</span>
+        <span> {{ user?.name }}</span>
+      </p>
+      <p>
+        <span>Email:</span>
+        <span> {{ user?.email }}</span>
+      </p>
+      <p>
+        <span>Website:</span>
+        <span> {{ user?.website }}</span>
+      </p>
+      <p>
+        <span>Company:</span>
+        <span> {{ user?.company?.name }}</span>
+      </p>
+      <p>
+        <span>Catchphrase:</span>
+        <span> {{ user?.company?.catchPhrase }}</span>
+      </p>
+      <p>
+        <span>BS:</span>
+        <span> {{ user?.company?.bs }}</span>
+      </p>
+    </div>
+
+  </div>
+</div>
