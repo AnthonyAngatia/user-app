@@ -49,8 +49,6 @@ export class UserFormComponent implements OnInit {
     delete formValue.company['companyName'];
 
     this.userService.createUser(formValue).subscribe((value) => {
-        console.log('User added successfully');
-        console.log(value);
         this.notifierService.notify('success', 'User added successfully', 'add-user');
       },
       error => {
