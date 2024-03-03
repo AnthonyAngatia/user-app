@@ -2,26 +2,23 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.10.
 
-## Development server
+## Objective
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+  * Intergrate to [JSONPLACEHOLDERAPI](https://jsonplaceholder.typicode.com/users) and create a display of users on a paginated view.
+  * Functionality to add new users
+  * Perform form validation
+  * Write unit test
+  * Component navigation(routing)
 
-## Code scaffolding
+## Pre-requisite to run the app
+1. Have npm installed. Version 6.14.17 should be okay(Haven't tested with other versions but may work).
+2. Have angular-cli version 14.2.13 and angular 14.3.0 installed.(Haven't tested other versions but they might work)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Running the application
+1. Clone the repo on your machine and perform an `npm install` to install the package dependencies.
+2. Run on terminal `ng serve` to execute the application.
+3. Run `npm test` to run the unit tests for the application
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Limitations
+1. The application can only simulate a pagination between 5 and 10 since the resource being returned by the API is limited to 10 items.
+2. We are not able to use pagination controls to move to the next stage because pagination is being done on the client-side and not on the server-side.

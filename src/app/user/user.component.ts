@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from "./user.service";
 import { Subscription } from "rxjs";
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
@@ -37,6 +37,9 @@ export class UserComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchUsers();
+    this.userService.listener$.subscribe({
+      next: value => this.users = this.userService.users.sort((a, b) => b.id - a.id)
+    });
   }
 
   addUser() {
@@ -77,7 +80,7 @@ export class UserComponent implements OnInit, OnDestroy {
   fetchUsers() {
     this.usersSub = this.userService.fetchUsers().subscribe({
         next: results => {
-          this.users = results;
+          this.users = this.userService.users.sort((a, b) => b.id - a.id);
         },
         error: error => {
           this.notifierService.notify('warning', error, 'uers-error')
@@ -88,21 +91,13 @@ export class UserComponent implements OnInit, OnDestroy {
 
   paginationChange(event: any) {
     const perPage = event.perPage;
-    this.usersSub = this.userService.fetchUsers().subscribe({
-        next: results => {
-          this.users = results.slice(0, perPage);
-          if (event.perPage > event.total) {
-            event.perPage = event.total;
-            event.lastRecord = event.total;
-          }else{
-          this.paginationConfig.lastRecord = perPage
-          }
-          this.paginationConfig = event;
-        },
-        error: error => {
-          this.notifierService.notify('warning', error, 'uers-error')
-        }
-      }
-    );
+    this.users = this.userService.users.sort((a, b) => b.id - a.id).slice(0, perPage);
+    if (event.perPage > event.total) {
+      event.perPage = event.total;
+      event.lastRecord = event.total;
+    }else{
+      this.paginationConfig.lastRecord = perPage
+    }
+    this.paginationConfig = event;
   }
 }

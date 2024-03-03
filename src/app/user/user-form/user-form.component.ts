@@ -50,10 +50,11 @@ export class UserFormComponent implements OnInit {
 
     this.userService.createUser(formValue).subscribe((value) => {
         this.notifierService.notify('success', 'User added successfully', 'add-user');
+        this.closeModal()
       },
       error => {
-        console.log('An error occurred');
         console.log(error);
+        this.notifierService.notify('error', 'An Error Occurred');
       })
 
   }

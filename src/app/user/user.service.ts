@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { catchError, map, Observable, throwError } from "rxjs";
+import { catchError, map, Observable, Subject, throwError } from "rxjs";
 import { IUser } from "../interfaces";
 
 @Injectable({
@@ -8,6 +8,10 @@ import { IUser } from "../interfaces";
 })
 export class UserService {
   private baseUrl = 'https://jsonplaceholder.typicode.com';
+  users: IUser[] = [];
+  private listeners = new Subject<any>();
+  listener$ = this.listeners.asObservable();
+
 
   constructor(private httpClient: HttpClient) {
   }
@@ -16,6 +20,8 @@ export class UserService {
     return this.httpClient.post<IUser>(`${this.baseUrl}/users`, user).pipe(
       map(response => {
         if (response.id) {
+          this.users?.push(response);
+          this.listeners.next(true)
           return response;
         } else if (!response) {
           throw new HttpErrorResponse({
@@ -45,6 +51,7 @@ export class UserService {
             url: `${this.baseUrl}/uses`
           });
         }
+        this.users = response;
         return response;
       }),
       catchError(this.handleError)

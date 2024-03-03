@@ -61,7 +61,7 @@
         </tr>
 
         <tr
-          *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: 1, totalItems: 10, id :'users-table' }"
+          *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: 1, totalItems: users.length, id :'users-table' }"
           [ngClass]="{'missing-company': user.company?.name}">
           <td [ngClass]="{'missing-company': !user.company?.name}">
             <img *ngIf="pattern.test(user.name)" class="svg-size" [src]="'../../assets/svg/man.svg'" alt="man-svg">
