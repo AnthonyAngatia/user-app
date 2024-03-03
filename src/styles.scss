@@ -5,3 +5,11 @@
 
 /* Importing Datepicker SCSS file. */
 @import "node_modules/ngx-bootstrap/datepicker/bs-datepicker";
+
+.color-red{
+  color: red;
+}
+.btn-pd-x{
+  padding-right: 62px;
+  padding-left: 62px;
+}

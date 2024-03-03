@@ -10,19 +10,19 @@ export interface IUser {
 }
 
 export interface IAddress{
-  street: string;
-  suite: string;
-  city: string;
-  zipcode: string;
-  geo: IGeo;
+  street?: string;
+  suite?: string;
+  city?: string;
+  zipcode?: string;
+  geo?: IGeo;
 }
 
 export interface ICompany{
-  name: string;
-  catchPhrase: string;
-  bs: string;
+  name?: string;
+  catchPhrase?: string;
+  bs?: string;
 }
 export interface IGeo{
-  lat: string;
-  lng: string;
+  lat?: string;
+  lng?: string;
 }

@@ -13,7 +13,7 @@ export class UserService {
   }
 
   createUser(user: IUser) {
-    this.httpClient.post<IUser>(`${this.baseUrl}/users`, user).pipe(
+    return this.httpClient.post<IUser>(`${this.baseUrl}/users`, user).pipe(
       map(response => {
         if (response.id) {
           return response;

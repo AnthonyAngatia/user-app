@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from "ngx-bootstrap/modal";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { UserService } from "../user.service";
+import { IUser } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-user-form',
@@ -10,7 +12,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 export class UserFormComponent implements OnInit {
   userForm!: FormGroup;
 
-  constructor(public bsModalRef: BsModalRef, private formBuilder: FormBuilder) {
+  constructor(public bsModalRef: BsModalRef, private formBuilder: FormBuilder, private userService: UserService) {
 
 
   }
@@ -26,17 +28,34 @@ export class UserFormComponent implements OnInit {
         street: [''],
         suite: [''],
         city: ['']
+      }),
+      company: this.formBuilder.group({
+        companyName: [''],
+        catchPhrase: [''],
+        bs: ['']
       })
     })
 
   }
 
-  closeModal(){
+  closeModal() {
     this.bsModalRef.hide();
   }
 
-  submitForm(){
-    console.log(this.userForm.value);
+  submitForm(formValue: any) {
+    // Transforming companyName to name
+    formValue.company.name = formValue.company['companyName'];
+    delete formValue.company['companyName'];
+
+    this.userService.createUser(formValue).subscribe((value) => {
+        console.log('User added successfully');
+        console.log(value);
+      },
+      error => {
+        console.log('An error occurred');
+        console.log(error);
+      })
+
   }
 
 }
