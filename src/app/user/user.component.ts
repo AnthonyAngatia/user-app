@@ -5,8 +5,9 @@ import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { UserFormComponent } from "./user-form/user-form.component";
 import { NotifierService } from "angular-notifier";
 import { IUser } from '../interfaces';
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder } from "@angular/forms";
 import { toggle } from "../animations";
+import { TABLE_PAGINATION_CONFIGS } from "../../environments/environment";
 
 @Component({
   selector: 'app-user',
@@ -28,6 +29,7 @@ export class UserComponent implements OnInit, OnDestroy {
   })
   showFilter = false;
   pattern = new RegExp('a');
+  paginationConfig = {...TABLE_PAGINATION_CONFIGS};
 
   constructor(private userService: UserService, private modalService: BsModalService,
               private notifierService: NotifierService, private formBuilder: FormBuilder) {
@@ -53,7 +55,7 @@ export class UserComponent implements OnInit, OnDestroy {
       const filteredUser = this.users.filter(user => pattern.test(user.name.toLowerCase()));
       if (filteredUser.length > 0) {
         this.users = filteredUser;
-      }else{
+      } else {
         this.notifierService.notify('success', 'User Not Found', 'Not Found')
       }
     }
@@ -62,7 +64,7 @@ export class UserComponent implements OnInit, OnDestroy {
       const filteredUser = this.users.filter(user => pattern.test(user.email.toLowerCase()));
       if (filteredUser.length > 0) {
         this.users = filteredUser;
-      }else{
+      } else {
         this.notifierService.notify('success', 'User Not Found', 'Not Found')
       }
     }
@@ -76,6 +78,26 @@ export class UserComponent implements OnInit, OnDestroy {
     this.usersSub = this.userService.fetchUsers().subscribe({
         next: results => {
           this.users = results;
+        },
+        error: error => {
+          this.notifierService.notify('warning', error, 'uers-error')
+        }
+      }
+    );
+  }
+
+  paginationChange(event: any) {
+    const perPage = event.perPage;
+    this.usersSub = this.userService.fetchUsers().subscribe({
+        next: results => {
+          this.users = results.slice(0, perPage);
+          if (event.perPage > event.total) {
+            event.perPage = event.total;
+            event.lastRecord = event.total;
+          }else{
+          this.paginationConfig.lastRecord = perPage
+          }
+          this.paginationConfig = event;
         },
         error: error => {
           this.notifierService.notify('warning', error, 'uers-error')

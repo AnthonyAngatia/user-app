@@ -6,12 +6,12 @@ export const environment = {
   production: false
 };
 export const TABLE_PAGINATION_CONFIGS = {
-  total: null,
+  total: 10,
   firstRecord: 1,
   lastRecord: 10,
   perPage: 10,
   page: 1,
-  pageSizes: [5, 10, 25, 50, 100, 250, 500],
+  pageSizes: [5, 10, 25, 50],
   maxSize: 4,
 };
 
